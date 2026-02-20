@@ -1,4 +1,23 @@
-# Nitro starter
+# Working with models and named constructors
 
-Look at the [nitro quick start](https://nitro.build/guide#quick-start) to learn more how to get started.
-# nitro-models-validation-and-transformation-Public
+## Example of Cat transformation
+
+Cat Models:
+- [CatRemote](cat/models/cat.remote.ts)
+- [Cat](cat/models/cat.ts)
+
+```typescript
+    const remoteResponse = { id: 1, name: 'Whiskers', age: 18, breed: 'Siamese' } 
+
+    // Create CatRemote
+    const verifiedAndTypesafeRemoteCat = CatRemote.create(remoteResponse);
+    console.log(verifiedAndTypesafeRemoteCat);
+    // Output:
+    // CatRemote { id: 1, name: 'Whiskers', age: 18, breed: 'Siamese' }
+
+    // Create Cat
+    const verifiedAndTypesafeCatSentToClient = Cat.create(verifiedAndTypesafeRemoteCat);
+    console.log(verifiedAndTypesafeCatSentToClient);
+    // Output:
+    // Cat { name: 'Whiskers', ageCategory: 'Senior', breed: 'Siamese' }
+```
